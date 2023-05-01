@@ -12,11 +12,10 @@
 
     h1 {
       font-size: 36px;
-	  display: flex;
+	  display: inline-block;
       align-items: center;
       height: 100%;
-	  text-align: right;
-	  background-image: linear-gradient(to right, #e873ff, #53fffc);
+	  background-image: linear-gradient(to right, #53fffc, #e873ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -25,12 +24,15 @@
       margin-right: 10px;
     }
 	
-    h1 span {
+	h1 span {
       margin-left: 20px;
     }
 
     h2 {
       display: inline-block;
+	  background-image: linear-gradient(to right, #e873ff, #53fffc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     table {
@@ -77,6 +79,7 @@
 </head>
 <body>
   <h1><img src="https://degens.degensfactory.xyz/_next/static/media/logo.f69ca142.svg" alt="Logo"><span>Trait Explorer</span></h1>
+  <br>
   <h2>Select a trait category:</h2>
   <select id="dropdown">
     <option value="">All Items</option>
