@@ -2,6 +2,7 @@
 <html>
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://degens.degensfactory.xyz/_next/static/media/logo_broom.981b15b9.svg">
   <title>Degens Trait Explorer</title>
   <style>
     body {
@@ -12,13 +13,27 @@
 
     h1 {
       font-size: 36px;
-	  background-image: linear-gradient(to right, #e873ff, #53fffc);
-      -webkit-background-clip: text;
+	  display: flex;
+      align-items: center;
+      height: 100%;
+	  background-image: linear-gradient(#e873ff, #53fffc);
+	  -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+	
+    h1 img {
+      margin-right: 10px;
+    }
+	
+	h1 span {
+      margin-left: 20px;
     }
 
     h2 {
       display: inline-block;
+	  background-image: linear-gradient(#e873ff, #53fffc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     table {
@@ -33,13 +48,13 @@
 
     th {
 	  font-size: 22px;
-	  background-image: linear-gradient(to right, #e873ff, #53fffc);
+	  background: linear-gradient(#53fffc, #e873ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 	
 	tr {
-	  background-image: linear-gradient(to right, #53fffc, #e873ff);
+	  background: linear-gradient(to right, #53fffc, #e873ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
 	}
@@ -50,7 +65,7 @@
       background-color: black;
       color: #e873ff;
 	  border: none;
-	  background-image: linear-gradient(to right, #53fffc, #e873ff);
+	  background-image: linear-gradient(to right, #e873ff, #53fffc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -64,8 +79,9 @@
   </style>
 </head>
 <body>
-  <h1>Degens Trait Explorer</h1>
-  <h2>Select an item:</h2>
+  <h1><img src="https://degens.degensfactory.xyz/_next/static/media/logo.f69ca142.svg" alt="Logo"><span>Trait Explorer</span></h1>
+  <br>
+  <h2>Select a trait category:</h2>
   <select id="dropdown">
     <option value="">All Items</option>
     <option value="Background">Background</option>
@@ -1606,7 +1622,7 @@
   
     document.addEventListener('DOMContentLoaded', function() {
       var dropdown = document.getElementById('dropdown');
-      dropdown.id = 1;
+      dropdown.selectedIndex = 0;
     });
   
     var dropdown = document.getElementById('dropdown');
