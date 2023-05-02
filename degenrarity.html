@@ -39,8 +39,6 @@
             width: 15%;
             padding: 10px;
             margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
             display: inline-block;
             vertical-align: top;
 			background-image: linear-gradient(#e873ff, #53fffc);
@@ -128,6 +126,53 @@
 			-webkit-text-fill-color: transparent;
 		}
 
+
+		  /* Modal styles */
+		  .modal {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.6);
+		  }
+		  
+		  .modal-content {
+			background-color: black;
+			padding: 20px;
+			border: 1px solid #888;
+			max-width: 400px;
+			text-align: center;
+			margin: auto; /* Center the modal horizontally */
+		  }
+		  
+		  .modal-content img {
+			max-width: 100%;
+			height: auto;
+			margin-bottom: 10px;
+		  }
+		  
+		  .close {
+			color: #aaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+			cursor: pointer;
+			display: none;
+		  }
+		  
+		  .close:hover,
+		  .close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		  }
+
     </style>
 </head>
 <body>
@@ -149,6 +194,16 @@
 	<div class="load-more-container">
 		<button id="load-more-button">Load More</button>
 	</div>
+	
+	<div id="modal" class="modal">
+	  <div class="modal-content">
+		<span class="close">&times;</span>
+		<div id="modal-nft-image"></div>
+		<div id="modal-nft-howrare"></div>
+		<div id="modal-nft-moonrank"></div>
+	  </div>
+	</div>
+
 
     <script>
 	
@@ -5796,6 +5851,12 @@
             nftCard.appendChild(nftHowRare);
             nftCard.appendChild(nftMoonRank);
             nftContainer.appendChild(nftCard);
+			
+			 // Attach click event listener to open the modal
+			nftCard.addEventListener("click", function() {
+			  openModal(nft);
+			});
+			
         }
 
         displayedNFTs += nftsPerPage;
@@ -5857,10 +5918,47 @@
 		displayNFTs(); // Display the sorted NFTs
 	});
 	
+	function openModal(nft) {
+	  var modal = document.getElementById("modal");
+	  var modalNFTImage = document.getElementById("modal-nft-image");
+	  var modalNFTHowRare = document.getElementById("modal-nft-howrare");
+	  var modalNFTMoonRank = document.getElementById("modal-nft-moonrank");
+
+	  // Set the NFT details in the modal
+	  modalNFTImage.innerHTML = '<img src="' + nft.image + '" alt="NFT Image">';
+	  modalNFTHowRare.textContent = "Howrare: " + nft.howrare;
+	  modalNFTMoonRank.textContent = "Moonrank: " + nft.moonrank;
+
+	  // Show the modal if it is not already visible
+	  if (modal.style.display !== "block") {
+		modal.style.display = "block";
+	  }
+	}
+
+	// Close the modal when the close button or outside modal is clicked
+	var modal = document.getElementById("modal");
+	var closeBtn = document.getElementsByClassName("close")[0];
+	modal.addEventListener("click", function (event) {
+	  if (event.target === modal || event.target === closeBtn) {
+		modal.style.display = "none";
+	  }
+	});
+	
+	// Hide the modal on page load
+	window.onload = function () {
+	  modal.style.display = "none";
+	};
+	
 	document.getElementById("sort-dropdown").value = "howrare"; // Set default value
 
 	sortNFTs(); // Sort the NFTs initially based on the default sort type
 	displayNFTs(); // Initial display of NFTs
+	
+	// Function to close the modal
+	function closeModal() {
+	  modal.style.display = "none";
+	  closeButton.style.display = "none";
+	}
 
     </script>
 </body>
