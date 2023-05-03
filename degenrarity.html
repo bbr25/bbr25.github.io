@@ -3,7 +3,7 @@
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://degens.degensfactory.xyz/_next/static/media/logo_broom.981b15b9.svg">
-    <title>NFT Explorer</title>
+    <title>Degens Rarity</title>
     <style>
 	    body {
 			background-color: black;
@@ -137,19 +137,18 @@
 			justify-content: center;
 			position: fixed;
 			z-index: 1;
-		    top: 8%;
-		    right: 0;
-		    bottom: 0;
-		    left: 0;
+		    top: 50%;
+		    left: 50%;
+			transform: translate(-50%, -50%);
 			overflow: auto;
-			background-color: transparent;
+			background-color: rgba(0, 0, 0, 0.5);
 		  }
 		  
 		.modal-content {
 		  background-color: black;
 		  padding: 20px;
 		  border: 1px solid #888;
-		  max-width: 800px;
+		  max-width: 1000px;
 		  text-align: center;
 		  margin: 0 auto;
 		  position: relative;
@@ -158,24 +157,29 @@
 		  align-items: center;
 		  font-size: 20px;
 		}
+
 		
 		.modal-content img {
-		  max-width: 100%;
-		  height: auto;
-		  margin-bottom: 10px;
+		  max-width: 500px;
+		  height: 500px;
+		  margin-right: 10px;
 		 }
 		  
-		#modal-nft-image {
-		  margin-right: 10px;
-		}
-
-		#modal-nft-additional {
+		#modal-nft-details {
+		  display: flex;
+		  align-items: center;
+		  margin-top: 10px;
 		  text-align: left;
 		  width: auto;
 		  white-space: nowrap;
 		  text-overflow: ellipsis;
 		  font-size: 20px;
 		}
+
+		#modal-nft-image {
+		  margin-right: 10px;
+		}
+
 		  
 		.close {
 		  color: white;
@@ -219,19 +223,17 @@
 	
 	<div id="modal" class="modal">
 	  <div class="modal-content">
-		<!-- Close button -->
 		<span id="modal-close" class="close">&times;</span>
-
 		<div id="modal-nft-details">
-		  <!-- NFT details -->
 		  <div id="modal-nft-image"></div>
 		  <div id="modal-nft-number"></div>
 		  <div id="modal-nft-howrare"></div>
 		  <div id="modal-nft-moonrank"></div>
+		  <div id="modal-nft-additional"></div>
 		</div>
-		<div id="modal-nft-additional" class="modal-nft-additional"></div>
 	  </div>
 	</div>
+
 
 
 
@@ -5935,19 +5937,17 @@
 
 	function openModal(nft) {
 	  var modal = document.getElementById("modal");
+	  var modalContent = document.querySelector(".modal-content");
+	  var modalClose = document.getElementById("modal-close");
 	  var modalNFTImage = document.getElementById("modal-nft-image");
 	  var modalNFTNumber = document.getElementById("modal-nft-number");
 	  var modalNFTHowRare = document.getElementById("modal-nft-howrare");
 	  var modalNFTMoonRank = document.getElementById("modal-nft-moonrank");
 	  var modalNFTAdditional = document.getElementById("modal-nft-additional");
 
-	  // Set the NFT image in the modal
+	// Set the NFT image in the modal
 	  modalNFTImage.innerHTML = '<img src="' + nft.image + '" alt="NFT Image">';
 
-	  // Set the NFT details in the modal
-	modalNFTNumber.innerHTML = "<strong><span style='color: #53fffc;'>" + nft.number + "</span></strong>";
-	modalNFTHowRare.innerHTML = "<strong><span style='color: #e873ff;'>Howrare: </span>" + ": &nbsp;&nbsp; <span style='color: #53fffc;'>" + nft.howrare + "</span></strong>";
-	modalNFTMoonRank.innerHTML = "<strong><span style='color: #e873ff;'>Moonrank: </span>" + ": &nbsp;&nbsp; <span style='color: #53fffc;'>" + nft.moonrank + "</span></strong>";
 
 	  // Set the additional attributes in the modal
 	  var additionalAttributes = "";
@@ -5956,7 +5956,10 @@
 		  additionalAttributes += "<div><strong><span style='color: #e873ff;'>" + attribute + ":</span>&nbsp;&nbsp;<span style='color: #53fffc;'>" + nft[attribute] + "</span></strong></div>";
 		}
 	  }
-	  modalNFTAdditional.innerHTML = additionalAttributes;
+	  
+	  // Set the NFT details in the modal
+	  modalNFTNumber.innerHTML = "<strong><span style='color: #53fffc;'>" + nft.number + "</span></strong><br>" + "<strong><span style='color: #e873ff;'>Howrare: </span>" + ": &nbsp;&nbsp; <span style='color: #53fffc;'>" + nft.howrare + "</span></strong><br>" + "<strong><span style='color: #e873ff;'>Moonrank: </span>" + ": &nbsp;&nbsp; <span style='color: #53fffc;'>" + nft.moonrank + "</span></strong><br><br>" + additionalAttributes;
+	  
 	  
 	  // Show the modal if it is not already visible
 	  if (modal.style.display !== "block") {
