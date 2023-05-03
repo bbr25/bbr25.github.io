@@ -3,8 +3,14 @@
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://degens.degensfactory.xyz/_next/static/media/logo_broom.981b15b9.svg">
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      window.scrollTo(0, 0);
+    });
+  </script>
     <title>Degens Rarity</title>
     <style>
+	
 	    body {
 			background-color: black;
 			color: #53fffc;
@@ -23,13 +29,9 @@
 		}
 		
 		h1 img {
-		  margin-right: 10px;
+		  margin-right: 30px;
 		}
 		
-		h1 span {
-		  margin-left: 20px;
-		}
-
         #nft-container {
             text-align: center;
             margin-top: 50px;
@@ -83,38 +85,28 @@
 		
         .search-container {
 			display: flex;
-			flex-direction: column;
 			align-items: center;
-			margin-bottom: 20px;
+			justify-content: center;
         }
 		
         #search-input {
-            margin-bottom: 20px;
             height: 30px;
 			width: 100px;
             font-size: 20px;
             padding: 5px;
+			margin-right: 10px;
 			font-weight: bold;
 			text-align: center;
 			background-image: linear-gradient(#e873ff, #53fffc);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: white;
 		}
-			
-		#clear-search-button {
-		    width: 120px;
-			height: 40px;
-			font-size: 16px;
-			background-image: linear-gradient(#e873ff, #53fffc);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-		}
 
 		
 		#sort-dropdown {
-			margin-top: 10px;
-			text-align: center;
+			margin-left: 10px;
 			font-size: 16px;
+			height: 40px;
 			background-image: linear-gradient(#e873ff, #53fffc);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
@@ -130,7 +122,7 @@
 			align-items: center;
 			justify-content: center;
 			position: fixed;
-			z-index: 1;
+			z-index: 9999;
 		    top: 50%;
 		    left: 50%;
 			transform: translate(-50%, -50%);
@@ -174,7 +166,48 @@
 		#modal-nft-image {
 		  margin-right: 10px;
 		}
+		
+		.rank-mythic {
+		  background-color:   #f483b3;
+		  color:  #970040;
+		  padding: 1px 10px;
+		  border-radius: 5px;
+		}
+		
+		.rank-legendary {
+		  background-color:   #ffb95b;
+		  color:   #bf6000;
+		  padding: 1px 10px;
+		  border-radius: 5px;
+		}
+		
+		.rank-epic {
+		  background-color:  #cb80ff;
+		  color:  #4f0184;
+		  padding: 1px 10px;
+		  border-radius: 5px;
+		}
 
+		.rank-rare {
+		  background-color:   #80f0ff;
+		  color:  #00606d;
+		  padding: 1px 10px;
+		  border-radius: 5px;
+		}
+		
+		.rank-uncommon {
+		  background-color:   #80ffb4;
+		  color:  #007c33;
+		  padding: 1px 10px;
+		  border-radius: 5px;
+		}
+		
+		.rank-common {
+		  background-color:   #d1d1d1;
+		  color:  #5b5b5b;
+		  padding: 1px 10px;
+		  border-radius: 5px;
+		}
 		  
 		.close {
 		  color: white;
@@ -197,18 +230,19 @@
     </style>
 </head>
 <body>
-	<h1><img src="https://degens.degensfactory.xyz/_next/static/media/logo.f69ca142.svg" alt="Logo"><span>Rarity</span></h1>
-	<br>
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search ID">
-        <button id="clear-search-button">Clear</button>
+		<h1><img src="https://degens.degensfactory.xyz/_next/static/media/logo.f69ca142.svg" alt="Logo">Rarity</h1>
+		<div class="search-container">
+		 <input type="text" id="search-input" placeholder="Search ID">
+		<select id="sort-dropdown">
+		  <option value="degens">Sort by DegenRank</option>
+		  <option value="howrare">Sort by Howrare</option>
+		  <option value="moonrank">Sort by Moonrank</option>
+		</select>
 		<br>
-        <select id="sort-dropdown">
-			<option value="degens">Sort by DegenRank</option>
-            <option value="howrare">Sort by Howrare</option>
-            <option value="moonrank">Sort by Moonrank</option>
-        </select>
-    </div>
+		<br>
+		</div>
+
+	
     <div id="nft-container">
         <!-- NFT cards will be dynamically added here -->
     </div>
@@ -231,7 +265,6 @@
     <script>
 	
         var nftContainer = document.getElementById("nft-container");
-        var clearSearchButton = document.getElementById("clear-search-button");
 		
 		var originalNFTs = [
 { image: "https://arweave.net/MRosxcfIWBX5EI088UMXvaQw7OhOYqZULHAWIpvYVdE/0.png", number: "Degen #0", degens: 3733, howrare: 3286, moonrank: 3088, Background: "Wired Yellow",  Broom: "Trippy Pink",  Skin: "Lava",  Hand: "Diamond Hand",  Mouth: "Butt Broom 2",  Head: "Buzz Cut",  Eyes: "Major Lazers",  Neckhole: "null",  Clothing: "Slob Tank",  Helmet: "null",  Extra: "null" },
@@ -5921,12 +5954,6 @@
 	  loadNFTs(originalNFTs, sortByDropdown.value);
 	}
 	
-	clearSearchButton.addEventListener("click", function() {
-		document.getElementById("search-input").value = ""; // Clear the search input
-		searchNFTs(); // Perform search
-		document.getElementById("sort-dropdown").value = "degens";
-	});
-	
 	document.getElementById("sort-dropdown").addEventListener("change", function() {
 		var sortType = this.value;
 		displayedNFTs = 0; // Reset the displayed NFTs counter
@@ -5960,7 +5987,70 @@
 	  }
 	  
 	  // Set the NFT details in the modal
-	  modalNFTNumber.innerHTML = "<strong><span style='color: #53fffc;'>" + nft.number + "</span></strong><br>" + "<strong><span style='color: #e873ff;'>DegenRank: </span>" + ": &nbsp;&nbsp; <span style='color: #53fffc;'>" + nft.degens + "</span></strong><br>" + "<strong><span style='color: #e873ff;'>Howrare: </span>" + ": &nbsp;&nbsp; <span style='color: #53fffc;'>" + nft.howrare + "</span></strong><br>" + "<strong><span style='color: #e873ff;'>Moonrank: </span>" + ": &nbsp;&nbsp; <span style='color: #53fffc;'>" + nft.moonrank + "</span></strong><br><br>" + additionalAttributes;
+		modalNFTNumber.innerHTML = "<strong><span style='color: #53fffc;'>" + nft.number + "</span></strong><br>"
+		  + "<strong><span style='color: #e873ff;'>DegenRank: </span>: &nbsp;&nbsp; <span class='" + getDegenRankClass(nft.degens) + "'>" + nft.degens + "</span></strong><br>"
+		  + "<strong><span style='color: #e873ff;'>Howrare: </span>: &nbsp;&nbsp; <span class='" + getDegenRankClass(nft.howrare) + "'>" + nft.howrare + "</span></strong><br>"
+		  + "<strong><span style='color: #e873ff;'>Moonrank: </span>: &nbsp;&nbsp; <span class='" + getDegenRankClass(nft.moonrank) + "'>" + nft.moonrank + "</span></strong><br><br>"
+		  + additionalAttributes;
+
+	// Set the "degenrank" value and apply color based on its value
+	var degenRankValue = nft.degens;
+	var howRareValue = nft.howrare;
+	var moonRankValue = nft.moonrank;
+
+	// Add class based on the "degenrank" value to apply different color
+	function getDegenRankClass(degenRankValue) {
+	if (degenRankValue >= 0 && degenRankValue <= 55) {
+	  return "rank-mythic";
+	} else if (degenRankValue > 55 && degenRankValue <= 278) {
+	  return "rank-legendary";
+	} else if (degenRankValue > 278 && degenRankValue <= 833) {
+	  return "rank-epic";
+	} else if (degenRankValue > 833 && degenRankValue <= 1944) {
+	  return "rank-rare";
+	} else if (degenRankValue > 1944 && degenRankValue <= 3333) {
+	  return "rank-uncommon";
+	} else {
+	  return "rank-common";
+	}
+	  return "";
+	}
+	
+	// Add class based on the "howrare" value to apply different color
+	function gethowRareClass(howRareValue) {
+	if (howRareValue >= 0 && howRareValue <= 55) {
+	  return "rank-mythic";
+	} else if (howRareValue > 55 && howRareValue <= 278) {
+	  return "rank-legendary";
+	} else if (howRareValue > 278 && howRareValue <= 833) {
+	  return "rank-epic";
+	} else if (howRareValue > 833 && howRareValue <= 1944) {
+	  return "rank-rare";
+	} else if (howRareValue > 1944 && howRareValue <= 3333) {
+	  return "rank-uncommon";
+	} else {
+	  return "rank-common";
+	}
+	  return "";
+	}
+	
+	// Add class based on the "moonrank" value to apply different color
+	function getmoonRankClass(moonRankValue) {
+	if (moonRankValue >= 0 && moonRankValue <= 55) {
+	  return "rank-mythic";
+	} else if (moonRankValue > 55 && moonRankValue <= 278) {
+	  return "rank-legendary";
+	} else if (moonRankValue > 278 && moonRankValue <= 833) {
+	  return "rank-epic";
+	} else if (moonRankValue > 833 && moonRankValue <= 1944) {
+	  return "rank-rare";
+	} else if (moonRankValue > 1944 && moonRankValue <= 3333) {
+	  return "rank-uncommon";
+	} else {
+	  return "rank-common";
+	}
+	  return "";
+	}
 	  
 	  
 	  // Show the modal if it is not already visible
@@ -6014,6 +6104,26 @@
 	  if (event.target === modal || event.target === closeBtn) {
 		modal.style.display = "none";
 	  }
+	});
+	
+	// Wait for the document to finish loading
+	window.addEventListener("load", function() {
+	  // Get the search input element
+	  var searchInput = document.getElementById("search-input");
+
+	  // Clear the search input value
+	  searchInput.value = "";
+	});
+	
+	window.addEventListener("scroll", function() {
+		var header = document.getElementById("header");
+		var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+		if (scrollPosition > 0) {
+			header.classList.add("sticky-header");
+		} else {
+			header.classList.remove("sticky-header");
+		}
 	});
 
     </script>
