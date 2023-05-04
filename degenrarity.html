@@ -6068,18 +6068,13 @@
 	  if (modal.style.display !== "block") {
 		modal.style.display = "block";
 	  }
+	  
+	document.documentElement.style.fontSize = "100%";
 
 	  // Close the modal when the close button is clicked
 	  modalClose.addEventListener("click", function() {
 		modal.style.display = "none";
 	  });
-	  
-	function openModal(nft) {
-	  // Code to open the modal
-	  
-	  // Zoom out the screen
-	  document.documentElement.style.fontSize = "100%";
-	}	  
 	  
 	}
 
@@ -6103,7 +6098,7 @@
 		
 		openModal(nft);
 	  });
-	});
+	});  
 	
 
 	// Hide the modal on page load
