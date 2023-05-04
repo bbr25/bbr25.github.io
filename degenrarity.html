@@ -6064,10 +6064,6 @@
 	}
 	  return "";
 	}
-	  
-	// Zoom out the screen on mobile
-	var viewportMetaTag = document.querySelector("meta[name=viewport]");
-	viewportMetaTag.setAttribute("content", "width=device-width, initial-scale=1");
 
 	  // Show the modal if it is not already visible
 	  if (modal.style.display !== "block") {
@@ -6079,6 +6075,12 @@
 		modal.style.display = "none";
 	  });
 	  
+	}
+
+	// Function to adjust the zoom level
+	function resetZoomLevel() {
+	  var viewportMetaTag = document.querySelector('meta[name="viewport"]');
+	  viewportMetaTag.content = "width=device-width, initial-scale=1.0";
 	}
 
 	// Attach click event listeners to each NFT card
@@ -6099,6 +6101,7 @@
 		  moonrank: nftMoonRank.textContent.replace("Moonrank: ", "")
 		};
 		
+		resetZoomLevel();
 		openModal(nft);
 	  });
 	});	  
