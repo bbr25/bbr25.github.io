@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://degens.degensfactory.xyz/_next/static/media/logo_broom.981b15b9.svg">
   <script>
@@ -232,6 +233,7 @@
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;
+			font-size: 8px;
 		  }
 		  .nft-card {
 			width: calc(25% - 16px);
@@ -6062,6 +6064,10 @@
 	}
 	  return "";
 	}
+	  
+	// Zoom out the screen on mobile
+	var viewportMetaTag = document.querySelector("meta[name=viewport]");
+	viewportMetaTag.setAttribute("content", "width=device-width, initial-scale=1");
 
 	  // Show the modal if it is not already visible
 	  if (modal.style.display !== "block") {
