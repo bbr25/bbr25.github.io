@@ -5933,6 +5933,7 @@
 		displayedNFTs = 0; // Reset the displayed NFTs counter
 		nftContainer.innerHTML = ""; // Clear the existing NFT container
 		displayNFTs(); // Display the filtered NFTs
+		document.documentElement.style.fontSize = "100%";
 
 		if (searchInput === "") {
 			nfts = originalNFTs.slice(); // Restore the original NFT list
@@ -5942,6 +5943,7 @@
 			displayedNFTs = 0; // Reset the displayed NFTs counter
 			nftContainer.innerHTML = ""; // Clear the existing NFT container
 			displayNFTs(); // Display the original NFTs sorted by rarity
+			document.documentElement.style.fontSize = "100%";
 		}
 	}
 	
@@ -6098,7 +6100,7 @@
 		
 		openModal(nft);
 	  });
-	});  
+	});	  
 	
 
 	// Hide the modal on page load
