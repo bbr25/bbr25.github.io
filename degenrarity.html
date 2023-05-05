@@ -87,16 +87,21 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			background-image: linear-gradient(#e873ff, #53fffc);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: white;
         }
 		
         #search-input {
             height: 30px;
 			width: 100px;
             font-size: 20px;
+			box-shadow: 1px 1px 5px #555 inset;
             padding: 5px;
 			margin-right: 10px;
 			font-weight: bold;
 			text-align: center;
+			color: #e873ff !important;
 			background-image: linear-gradient(#e873ff, #53fffc);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: white;
@@ -107,6 +112,9 @@
 			margin-left: 10px;
 			font-size: 16px;
 			height: 40px;
+			box-shadow: 1px 1px 5px #555 inset;
+			color: #e873ff !important;
+			background: black;
 			background-image: linear-gradient(#e873ff, #53fffc);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
@@ -253,7 +261,6 @@
 		<br>
 		<br>
 		</div>
-
 	
     <div id="nft-container">
         <!-- NFT cards will be dynamically added here -->
@@ -5879,6 +5886,7 @@
 
 	  for (var i = startIndex; i < endIndex; i++) {
 		var nft = nfts[i];
+		
 		var nftCard = document.createElement("div");
 		nftCard.classList.add("nft-card");
 
@@ -5920,7 +5928,7 @@
 	  displayedNFTs += nftsPerPage;
 
 	}
-
+	
 
 	function searchNFTs() {
 		var searchInput = document.getElementById("search-input").value.trim().toLowerCase();
