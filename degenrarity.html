@@ -6735,16 +6735,6 @@
 	  searchInput.value = "";
 	});
 	
-	window.addEventListener("scroll", function() {
-		var header = document.getElementById("header");
-		var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-		if (scrollPosition > 0) {
-			header.classList.add("sticky-header");
-		} else {
-			header.classList.remove("sticky-header");
-		}
-	});
 	
 	const clearButton = document.getElementById("clear-btn");
 	const searchInput = document.getElementById("search-input");
