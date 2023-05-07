@@ -133,10 +133,25 @@
 		label {
 		  flex: 1;
 		}
+
+		.label-style1 {
+		  display: inline-block;
+		  width: 10em;
+		  text-align: center;
+		  margin-right: 1em;
+		}
 		
+		.label-style2 {
+		  display: inline-block;
+		  width: 8em;
+		  text-align: center;
+		  margin-right: 1em;
+		}
+
 		.attribute-dropdown {
 			font-size: 14px;
 			height: 30px;
+			width: 100%;
 			box-shadow: 1px 1px 5px #555 inset;
 			color: #e873ff !important;
 			background: black;
@@ -275,13 +290,43 @@
 			flex-wrap: wrap;
 			justify-content: center;
 		  }
+		  
 		  .nft-card {
 			width: calc(25% - 16px);
 			margin: 8px;
 		  }
+		  
 		  .attribute-filter {
 			display: block; /* Change display to block for mobile */
 			margin-bottom: 10px; /* Add some bottom margin for spacing */
+		  }
+		  
+		  .label-style1 {
+		    display: inline-block;
+		    width: 50%;
+		    text-align: center;
+		    margin-right: 1em;
+		    margin-bottom: 0.5em;
+		  }
+		
+		  .label-style2 {
+		    display: inline-block;
+		    width: 50%;
+		    text-align: center;
+		    margin-right: 1em;
+		    margin-bottom: 1em;
+		  }
+
+		  .attribute-dropdown {
+			font-size: 14px;
+			height: 30px;
+			width: 50%;
+			box-shadow: 1px 1px 5px #555 inset;
+			color: #e873ff !important;
+			background: black;
+			background-image: linear-gradient(#e873ff, #53fffc);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
 		  }
 		}
 
@@ -305,63 +350,41 @@
 		
 		<div id="attribute-filter" style="text-align-last: center;">
 		  <div style="display: inline-block;">
-			<label for="background-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Background:
-			  <select id="background-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="background-dropdown" class="label-style1">Background:
+			  <select id="background-dropdown" class="attribute-dropdown"></select>
 			</label>
-			<label for="broom-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Broom:
-			  <select id="broom-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="broom-dropdown" class="label-style1">Broom:
+			  <select id="broom-dropdown" class="attribute-dropdown"></select>
 			</label>
-			<label for="skin-dropdown" style="display: inline-block; width: 8em; text-align: center; margin-right: 1em;">Skin:
-			  <select id="skin-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="skin-dropdown" class="label-style2">Skin:
+			  <select id="skin-dropdown" class="attribute-dropdown"></select>
 			</label>
-			<label for="hand-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Hand:
-			  <select id="hand-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="hand-dropdown" class="label-style1">Hand:
+			  <select id="hand-dropdown" class="attribute-dropdown"></select>
 			</label>
-			<label for="mouth-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Mouth:
-			  <select id="mouth-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="mouth-dropdown" class="label-style1">Mouth:
+			  <select id="mouth-dropdown" class="attribute-dropdown"></select>
 			</label>
-			<label for="head-dropdown" style="display: inline-block; width: 10em; text-align: center;">Head:
-			  <select id="head-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="head-dropdown" class="label-style1">Head:
+			  <select id="head-dropdown" class="attribute-dropdown"></select>
 			</label>
 		  </div>
 		  <div style="display: inline-block;">
 		  <br>
-			<label for="eyes-dropdown" style="display: inline-block; width: 8em; text-align: center; margin-right: 1em;">Eyes:
-			  <select id="eyes-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="eyes-dropdown" class="label-style2">Eyes:
+			  <select id="eyes-dropdown" class="attribute-dropdown"></select>
 			</label>
-			<label for="neckhole-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Neckhole:
-			  <select id="neckhole-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="neckhole-dropdown" class="label-style1">Neckhole:
+			  <select id="neckhole-dropdown" class="attribute-dropdown"></select>
 			</label>
-			<label for="clothing-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Clothing:
-			  <select id="clothing-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="clothing-dropdown" class="label-style1">Clothing:
+			  <select id="clothing-dropdown" class="attribute-dropdown"></select>
 			</label>
-			<label for="helmet-dropdown" style="display: inline-block; width: 8em; text-align: center; margin-right: 1em;">Helmet:
-			  <select id="helmet-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="helmet-dropdown" class="label-style2">Helmet:
+			  <select id="helmet-dropdown" class="attribute-dropdown"></select>
 			</label>
-			<label for="extra-dropdown" style="display: inline-block; width: 8em; text-align: center;">Extra:
-			  <select id="extra-dropdown" class="attribute-dropdown" style="width: 100%;">
-				<!-- Options will be dynamically populated by JavaScript -->
-			  </select>
+			<label for="extra-dropdown" class="label-style2">Extra:
+			  <select id="extra-dropdown" class="attribute-dropdown"></select>
 			</label>
 		  </div>
 		</div>
