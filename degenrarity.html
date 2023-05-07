@@ -87,6 +87,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			margin: 0 auto;
 			background-image: linear-gradient(#e873ff, #53fffc);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: white;
@@ -125,9 +126,33 @@
 		#attribute-filter {
 		  font-size: 18px;
 		  display: flex;
-		  flex-wrap: wrap;
 		  justify-content: center;
 		  align-items: center;
+		  width: 85%;
+		  margin: 0 auto;
+		  height: auto;
+		  background-image: linear-gradient(#e873ff, #53fffc);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+		
+		.attribute-dropdowns {
+			margin: auto;
+			width: 80%;
+			align-items: center;
+		}
+		
+		.attribute-dropdown {
+			font-size: 14px;
+			height: 30px;
+			width: 100%;
+			margin-bottom: 1em;
+			box-shadow: 1px 1px 5px #555 inset;
+			color: #e873ff !important;
+			background: black;
+			background-image: linear-gradient(#e873ff, #53fffc);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
 		}
 		
 		label {
@@ -136,28 +161,14 @@
 
 		.label-style1 {
 		  display: inline-block;
-		  width: 10em;
+		  width: 175px;
 		  text-align: center;
-		  margin-right: 1em;
 		}
 		
 		.label-style2 {
 		  display: inline-block;
-		  width: 8em;
+		  width: 175px;
 		  text-align: center;
-		  margin-right: 1em;
-		}
-
-		.attribute-dropdown {
-			font-size: 14px;
-			height: 30px;
-			width: 100%;
-			box-shadow: 1px 1px 5px #555 inset;
-			color: #e873ff !important;
-			background: black;
-			background-image: linear-gradient(#e873ff, #53fffc);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
 		}
 		
 		.clear-button {
@@ -317,7 +328,7 @@
 		<br>
 		
 		<div id="attribute-filter" style="text-align-last: center;">
-		  <div style="display: inline-block;">
+		  <div id="attribute-dropdowns">
 			<label for="background-dropdown" class="label-style1">Background:
 			  <select id="background-dropdown" class="attribute-dropdown"></select>
 			</label>
@@ -336,9 +347,6 @@
 			<label for="head-dropdown" class="label-style1">Head:
 			  <select id="head-dropdown" class="attribute-dropdown"></select>
 			</label>
-		  </div>
-		  <div style="display: inline-block;">
-		  <br>
 			<label for="eyes-dropdown" class="label-style2">Eyes:
 			  <select id="eyes-dropdown" class="attribute-dropdown"></select>
 			</label>
