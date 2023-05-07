@@ -109,12 +109,46 @@
 
 		
 		#sort-dropdown {
+			text-align-last: center;
 			margin-left: 10px;
+			margin-right: 20px;
 			font-size: 16px;
 			height: 40px;
 			box-shadow: 1px 1px 5px #555 inset;
 			color: #e873ff !important;
 			background: black;
+			background-image: linear-gradient(#e873ff, #53fffc);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+		
+		#attribute-filter {
+		  font-size: 18px;
+		  display: flex;
+		  flex-wrap: wrap;
+		  justify-content: center;
+		  align-items: center;
+		}
+		
+		label {
+		  flex: 1;
+		}
+		
+		.attribute-dropdown {
+			font-size: 14px;
+			height: 30px;
+			box-shadow: 1px 1px 5px #555 inset;
+			color: #e873ff !important;
+			background: black;
+			background-image: linear-gradient(#e873ff, #53fffc);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+		
+		.clear-button {
+		    width: 120px;
+			height: 40px;
+			font-size: 16px;
 			background-image: linear-gradient(#e873ff, #53fffc);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
@@ -258,9 +292,76 @@
 		  <option value="howrare">Sort by Howrare</option>
 		  <option value="moonrank">Sort by Moonrank</option>
 		</select>
+		<button id="clear-btn" class="clear-button">Clear</button>
 		<br>
 		<br>
 		</div>
+		
+		<br>
+		
+		<div id="attribute-filter" style="text-align-last: center;">
+		  <div style="display: inline-block;">
+			<label for="background-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Background:
+			  <select id="background-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+			<label for="broom-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Broom:
+			  <select id="broom-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+			<label for="skin-dropdown" style="display: inline-block; width: 8em; text-align: center; margin-right: 1em;">Skin:
+			  <select id="skin-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+			<label for="hand-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Hand:
+			  <select id="hand-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+			<label for="mouth-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Mouth:
+			  <select id="mouth-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+			<label for="head-dropdown" style="display: inline-block; width: 10em; text-align: center;">Head:
+			  <select id="head-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+		  </div>
+		  <div style="display: inline-block;">
+		  <br>
+			<label for="eyes-dropdown" style="display: inline-block; width: 8em; text-align: center; margin-right: 1em;">Eyes:
+			  <select id="eyes-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+			<label for="neckhole-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Neckhole:
+			  <select id="neckhole-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+			<label for="clothing-dropdown" style="display: inline-block; width: 10em; text-align: center; margin-right: 1em;">Clothing:
+			  <select id="clothing-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+			<label for="helmet-dropdown" style="display: inline-block; width: 8em; text-align: center; margin-right: 1em;">Helmet:
+			  <select id="helmet-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+			<label for="extra-dropdown" style="display: inline-block; width: 8em; text-align: center;">Extra:
+			  <select id="extra-dropdown" class="attribute-dropdown" style="width: 100%;">
+				<!-- Options will be dynamically populated by JavaScript -->
+			  </select>
+			</label>
+		  </div>
+		</div>
+
 	
     <div id="nft-container">
         <!-- NFT cards will be dynamically added here -->
@@ -5846,6 +5947,17 @@
 		
 		];
 
+		populateBackgroundDropdown();
+		populateBroomDropdown();
+		populateSkinDropdown();
+		populateHandDropdown();
+		populateMouthDropdown();
+		populateHeadDropdown();
+		populateEyesDropdown();
+		populateNeckholeDropdown();
+		populateClothingDropdown();
+		populateHelmetDropdown();
+		populateExtraDropdown();
         var nfts = originalNFTs.slice(); // Copy the original NFT list
         var nftsPerPage = 25;
         var displayedNFTs = 0;
@@ -5928,7 +6040,355 @@
 	  displayedNFTs += nftsPerPage;
 
 	}
-	
+
+  
+	  // Populate the background dropdown with unique background options
+	  function populateBackgroundDropdown() {
+		var backgroundDropdown = document.getElementById("background-dropdown");
+		var uniqueBackgrounds = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    backgroundDropdown.add(allOption);
+		
+		// Get all unique backgrounds from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueBackgrounds.indexOf(nft.Background) === -1) {
+			uniqueBackgrounds.push(nft.Background);
+		  }
+		}
+		
+		uniqueBackgrounds.sort();
+		
+		// Create and append an option for each unique background
+		for (var j = 0; j < uniqueBackgrounds.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueBackgrounds[j];
+		  option.text = uniqueBackgrounds[j];
+		  backgroundDropdown.add(option);
+		}
+	  }
+	  
+	  // Populate the broom dropdown with unique broom options
+	  function populateBroomDropdown() {
+		var broomDropdown = document.getElementById("broom-dropdown");
+		var uniqueBrooms = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    broomDropdown.add(allOption);
+		
+		// Get all unique brooms from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueBrooms.indexOf(nft.Broom) === -1) {
+			uniqueBrooms.push(nft.Broom);
+		  }
+		}
+		
+		uniqueBrooms.sort();
+		
+		// Create and append an option for each unique broom
+		for (var j = 0; j < uniqueBrooms.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueBrooms[j];
+		  option.text = uniqueBrooms[j];
+		  broomDropdown.add(option);
+		}
+	  }
+	  
+	  // Populate the skin dropdown with unique skin options
+	  function populateSkinDropdown() {
+		var skinDropdown = document.getElementById("skin-dropdown");
+		var uniqueSkins = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    skinDropdown.add(allOption);
+		
+		// Get all unique skins from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueSkins.indexOf(nft.Skin) === -1) {
+			uniqueSkins.push(nft.Skin);
+		  }
+		}
+		
+		uniqueSkins.sort();
+		
+		// Create and append an option for each unique skin
+		for (var j = 0; j < uniqueSkins.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueSkins[j];
+		  option.text = uniqueSkins[j];
+		  skinDropdown.add(option);
+		}
+	  }
+	  
+	  // Populate the hand dropdown with unique hand options
+	  function populateHandDropdown() {
+		var handDropdown = document.getElementById("hand-dropdown");
+		var uniqueHands = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    handDropdown.add(allOption);
+		
+		// Get all unique hands from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueHands.indexOf(nft.Hand) === -1) {
+			uniqueHands.push(nft.Hand);
+		  }
+		}
+		
+		uniqueHands.sort();
+		
+		// Create and append an option for each unique hand
+		for (var j = 0; j < uniqueHands.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueHands[j];
+		  option.text = uniqueHands[j];
+		  handDropdown.add(option);
+		}
+	  }
+	  
+	  // Populate the mouth dropdown with unique mouth options
+	  function populateMouthDropdown() {
+		var mouthDropdown = document.getElementById("mouth-dropdown");
+		var uniqueMouths = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    mouthDropdown.add(allOption);
+		
+		// Get all unique mouths from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueMouths.indexOf(nft.Mouth) === -1) {
+			uniqueMouths.push(nft.Mouth);
+		  }
+		}
+		
+		uniqueMouths.sort();
+		
+		// Create and append an option for each unique mouth
+		for (var j = 0; j < uniqueMouths.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueMouths[j];
+		  option.text = uniqueMouths[j];
+		  mouthDropdown.add(option);
+		}
+	  }
+	  
+	  // Populate the head dropdown with unique head options
+	  function populateHeadDropdown() {
+		var headDropdown = document.getElementById("head-dropdown");
+		var uniqueHeads = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    headDropdown.add(allOption);
+		
+		// Get all unique heads from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueHeads.indexOf(nft.Head) === -1) {
+			uniqueHeads.push(nft.Head);
+		  }
+		}
+		
+		uniqueHeads.sort();
+		
+		// Create and append an option for each unique head
+		for (var j = 0; j < uniqueHeads.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueHeads[j];
+		  option.text = uniqueHeads[j];
+		  headDropdown.add(option);
+		}
+	  }
+	  
+	  // Populate the hand dropdown with unique hand options
+	  function populateHandDropdown() {
+		var handDropdown = document.getElementById("hand-dropdown");
+		var uniqueHands = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    handDropdown.add(allOption);
+		
+		// Get all unique hands from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueHands.indexOf(nft.Hand) === -1) {
+			uniqueHands.push(nft.Hand);
+		  }
+		}
+		
+		uniqueHands.sort();
+		
+		// Create and append an option for each unique hand
+		for (var j = 0; j < uniqueHands.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueHands[j];
+		  option.text = uniqueHands[j];
+		  handDropdown.add(option);
+		}
+	  }
+
+	  // Populate the eyes dropdown with unique eyes options
+	  function populateEyesDropdown() {
+		var eyesDropdown = document.getElementById("eyes-dropdown");
+		var uniqueEyes = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    eyesDropdown.add(allOption);
+		
+		// Get all unique eyess from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueEyes.indexOf(nft.Eyes) === -1) {
+			uniqueEyes.push(nft.Eyes);
+		  }
+		}
+		
+		uniqueEyes.sort();
+		
+		// Create and append an option for each unique eyes
+		for (var j = 0; j < uniqueEyes.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueEyes[j];
+		  option.text = uniqueEyes[j];
+		  eyesDropdown.add(option);
+		}
+	  }
+	  
+	  // Populate the neckhole dropdown with unique neckhole options
+	  function populateNeckholeDropdown() {
+		var neckholeDropdown = document.getElementById("neckhole-dropdown");
+		var uniqueNeckholes = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    neckholeDropdown.add(allOption);
+		
+		// Get all unique neckholes from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueNeckholes.indexOf(nft.Neckhole) === -1) {
+			uniqueNeckholes.push(nft.Neckhole);
+		  }
+		}
+		
+		uniqueNeckholes.sort();
+		
+		// Create and append an option for each unique neckhole
+		for (var j = 0; j < uniqueNeckholes.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueNeckholes[j];
+		  option.text = uniqueNeckholes[j];
+		  neckholeDropdown.add(option);
+		}
+	  }
+	  
+	  // Populate the clothing dropdown with unique clothing options
+	  function populateClothingDropdown() {
+		var clothingDropdown = document.getElementById("clothing-dropdown");
+		var uniqueClothings = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    clothingDropdown.add(allOption);
+		
+		// Get all unique clothings from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueClothings.indexOf(nft.Clothing) === -1) {
+			uniqueClothings.push(nft.Clothing);
+		  }
+		}
+		
+		uniqueClothings.sort();
+		
+		// Create and append an option for each unique clothing
+		for (var j = 0; j < uniqueClothings.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueClothings[j];
+		  option.text = uniqueClothings[j];
+		  clothingDropdown.add(option);
+		}
+	  }
+	  
+	  // Populate the helmet dropdown with unique helmet options
+	  function populateHelmetDropdown() {
+		var helmetDropdown = document.getElementById("helmet-dropdown");
+		var uniqueHelmets = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    helmetDropdown.add(allOption);
+		
+		// Get all unique helmets from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueHelmets.indexOf(nft.Helmet) === -1) {
+			uniqueHelmets.push(nft.Helmet);
+		  }
+		}
+		
+		uniqueHelmets.sort();
+		
+		// Create and append an option for each unique helmet
+		for (var j = 0; j < uniqueHelmets.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueHelmets[j];
+		  option.text = uniqueHelmets[j];
+		  helmetDropdown.add(option);
+		}
+	  }
+	  
+	  // Populate the extra dropdown with unique extra options
+	  function populateExtraDropdown() {
+		var extraDropdown = document.getElementById("extra-dropdown");
+		var uniqueExtras = [];
+		
+	    var allOption = document.createElement("option");
+	    allOption.value = "";
+	    allOption.text = "All";
+	    extraDropdown.add(allOption);
+		
+		// Get all unique extras from originalNfts
+		for (var i = 0; i < originalNFTs.length; i++) {
+		  var nft = originalNFTs[i];
+		  if (uniqueExtras.indexOf(nft.Extra) === -1) {
+			uniqueExtras.push(nft.Extra);
+		  }
+		}
+		
+		uniqueExtras.sort();
+		
+		// Create and append an option for each unique extra
+		for (var j = 0; j < uniqueExtras.length; j++) {
+		  var option = document.createElement("option");
+		  option.value = uniqueExtras[j];
+		  option.text = uniqueExtras[j];
+		  extraDropdown.add(option);
+		}
+	  }
 
 	function searchNFTs() {
 		var searchInput = document.getElementById("search-input").value.trim().toLowerCase();
@@ -5952,6 +6412,134 @@
 			displayNFTs(); // Display the original NFTs sorted by rarity
 		}
 	}
+	
+		function filterNFTs() {
+		  nfts = originalNFTs.slice(); // Restore the original NFT list before filtering
+		  var selectedBackground = document.getElementById("background-dropdown").value;
+		  var selectedBroom = document.getElementById("broom-dropdown").value;
+		  var selectedSkin = document.getElementById("skin-dropdown").value;
+		  var selectedHand = document.getElementById("hand-dropdown").value;
+		  var selectedMouth = document.getElementById("mouth-dropdown").value;
+		  var selectedHead = document.getElementById("head-dropdown").value;
+		  var selectedEyes = document.getElementById("eyes-dropdown").value;
+		  var selectedNeckhole = document.getElementById("neckhole-dropdown").value;
+		  var selectedClothing = document.getElementById("clothing-dropdown").value;
+		  var selectedHelmet = document.getElementById("helmet-dropdown").value;
+		  var selectedExtra = document.getElementById("extra-dropdown").value;
+
+		  if (selectedBackground !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Background === selectedBackground;
+			});
+		  }
+
+		  if (selectedBroom !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Broom === selectedBroom;
+			});
+		  }
+		  
+		  if (selectedSkin !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Skin === selectedSkin;
+			});
+		  }
+		  
+		  if (selectedHand !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Hand === selectedHand;
+			});
+		  }
+		  
+		  if (selectedMouth !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Mouth === selectedMouth;
+			});
+		  }
+		  
+		  if (selectedHead !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Head === selectedHead;
+			});
+		  }
+		  
+		  if (selectedEyes !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Eyes === selectedEyes;
+			});
+		  }
+		  
+		  if (selectedNeckhole !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Neckhole === selectedNeckhole;
+			});
+		  }
+		  
+		  if (selectedClothing !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Clothing === selectedClothing;
+			});
+		  }
+		  
+		  if (selectedHelmet !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Helmet === selectedHelmet;
+			});
+		  }
+		  
+		  if (selectedExtra !== "") {
+			nfts = nfts.filter(function(nft) {
+			  return nft.Extra === selectedExtra;
+			});
+		  }
+
+		  displayedNFTs = 0; // Reset the displayed NFTs counter
+		  nftContainer.innerHTML = ""; // Clear the existing NFT container
+		  sortNFTs();
+		  displayNFTs(); // Display the filtered NFTs
+
+		  if (selectedBackground === "" && selectedBroom === "" && selectedSkin === "" && selectedHand === "" && selectedMouth === "" && selectedHead === "" && selectedEyes === "" && selectedNeckhole === "" && selectedClothing === "" && selectedHelmet === "" && selectedExtra === "") {
+			nfts = originalNFTs.slice(); // Restore the original NFT list
+			sortNFTs();
+			displayedNFTs = 0; // Reset the displayed NFTs counter
+			nftContainer.innerHTML = ""; // Clear the existing NFT container
+			displayNFTs(); // Display the original NFTs sorted by rarity
+		  }
+		}
+		
+	// Add event listeners to the dropdowns
+	var backgroundDropdown = document.getElementById("background-dropdown");
+	backgroundDropdown.addEventListener("change", filterNFTs);
+
+	var broomDropdown = document.getElementById("broom-dropdown");
+	broomDropdown.addEventListener("change", filterNFTs);
+	
+	var skinDropdown = document.getElementById("skin-dropdown");
+	skinDropdown.addEventListener("change", filterNFTs);
+	
+	var handDropdown = document.getElementById("hand-dropdown");
+	handDropdown.addEventListener("change", filterNFTs);
+	
+	var mouthDropdown = document.getElementById("mouth-dropdown");
+	mouthDropdown.addEventListener("change", filterNFTs);
+	
+	var headDropdown = document.getElementById("head-dropdown");
+	headDropdown.addEventListener("change", filterNFTs);
+	
+	var eyesDropdown = document.getElementById("eyes-dropdown");
+	eyesDropdown.addEventListener("change", filterNFTs);
+	
+	var neckholeDropdown = document.getElementById("neckhole-dropdown");
+	neckholeDropdown.addEventListener("change", filterNFTs);
+	
+	var clothingDropdown = document.getElementById("clothing-dropdown");
+	clothingDropdown.addEventListener("change", filterNFTs);
+	
+	var helmetDropdown = document.getElementById("helmet-dropdown");
+	helmetDropdown.addEventListener("change", filterNFTs);
+
+	var extraDropdown = document.getElementById("extra-dropdown");
+	extraDropdown.addEventListener("change", filterNFTs);
 	
 	// Event listener for scroll event
 	window.addEventListener("scroll", function() {
@@ -5998,21 +6586,21 @@
 
 
 	  // Set the additional attributes in the modal
-var additionalAttributes = "";
-for (var attribute in nft) {
-  if (attribute !== "image" && attribute !== "number" && attribute !== "degens" && attribute !== "howrare" && attribute !== "moonrank" && attribute !== "Backgroundtwo" && attribute !== "Broomtwo" && attribute !== "Skintwo" && attribute !== "Handtwo" && attribute !== "Mouthtwo" && attribute !== "Headtwo" && attribute !== "Eyestwo" && attribute !== "Neckholetwo" && attribute !== "Clothingtwo" && attribute !== "Helmettwo" && attribute !== "Extratwo") {
-    additionalAttributes += "<div><strong><span style='color: #e873ff;'>" + attribute + ":</span>&nbsp;&nbsp;<span style='color: #53fffc;'>" + nft[attribute] + "</span>";
-    
-    // Check if the current attribute has a second attribute
-    var secondAttributeName = attribute + "two";
-    var secondAttributeValue = nft[secondAttributeName];
-    if (secondAttributeValue) {
-      additionalAttributes += "&nbsp;&nbsp;&nbsp;<span style='color: #bf9dfe;'>" + secondAttributeValue + "</span>";
-    }
-    additionalAttributes += "</strong></div>";
-  }
-}
-	  
+	var additionalAttributes = "";
+	for (var attribute in nft) {
+	  if (attribute !== "image" && attribute !== "number" && attribute !== "degens" && attribute !== "howrare" && attribute !== "moonrank" && attribute !== "Backgroundtwo" && attribute !== "Broomtwo" && attribute !== "Skintwo" && attribute !== "Handtwo" && attribute !== "Mouthtwo" && attribute !== "Headtwo" && attribute !== "Eyestwo" && attribute !== "Neckholetwo" && attribute !== "Clothingtwo" && attribute !== "Helmettwo" && attribute !== "Extratwo") {
+		additionalAttributes += "<div><strong><span style='color: #e873ff;'>" + attribute + ":</span>&nbsp;&nbsp;<span style='color: #53fffc;'>" + nft[attribute] + "</span>";
+		
+		// Check if the current attribute has a second attribute
+		var secondAttributeName = attribute + "two";
+		var secondAttributeValue = nft[secondAttributeName];
+		if (secondAttributeValue) {
+		  additionalAttributes += "&nbsp;&nbsp;&nbsp;<span style='color: #bf9dfe;'>" + secondAttributeValue + "</span>";
+		}
+		additionalAttributes += "</strong></div>";
+	  }
+	}
+		  
 	  // Set the NFT details in the modal
 		modalNFTNumber.innerHTML = "<strong><span style='color: #53fffc;'>" + nft.number + "</span></strong><br>"
 		  + "<strong><span style='color: #e873ff;'>DegenRank: </span>: &nbsp;&nbsp; <span class='" + getDegenRankClass(nft.degens) + "'>" + nft.degens + "</span></strong><br>"
@@ -6152,6 +6740,21 @@ for (var attribute in nft) {
 		} else {
 			header.classList.remove("sticky-header");
 		}
+	});
+	
+	const clearButton = document.getElementById("clear-btn");
+	const searchInput = document.getElementById("search-input");
+	clearButton.addEventListener("click", () => {
+	  const attributeDropdowns = document.getElementsByClassName("attribute-dropdown");
+	  for (let i = 0; i < attributeDropdowns.length; i++) {
+		attributeDropdowns[i].selectedIndex = 0;
+	  }
+	searchInput.value = "";
+	nfts = originalNFTs.slice(); // Restore the original NFT list
+	sortNFTs();
+	displayedNFTs = 0; // Reset the displayed NFTs counter
+	nftContainer.innerHTML = ""; // Clear the existing NFT container
+	displayNFTs(); // Display the original NFTs sorted by rarity
 	});
 
     </script>
