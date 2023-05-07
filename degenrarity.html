@@ -154,6 +154,10 @@
 			-webkit-text-fill-color: transparent;
 		}
 		
+		.count {
+		  color: blue;
+		}
+		
 		label {
 		  flex: 1;
 		}
@@ -6045,53 +6049,63 @@
 
 	}
 
-  
-	  // Populate the background dropdown with unique background options
-	  function populateBackgroundDropdown() {
-		var backgroundDropdown = document.getElementById("background-dropdown");
-		var uniqueBackgrounds = [];
-		
-	    var allOption = document.createElement("option");
-	    allOption.value = "";
-	    allOption.text = "All";
-	    backgroundDropdown.add(allOption);
-		
-		// Get all unique backgrounds from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueBackgrounds.indexOf(nft.Background) === -1) {
-			uniqueBackgrounds.push(nft.Background);
+	  
+		// Populate the background dropdown with unique background options and counts
+		function populateBackgroundDropdown() {
+		  var backgroundDropdown = document.getElementById("background-dropdown");
+		  var uniqueBackgrounds = [];
+		  var backgroundCounts = {};
+
+		  var allOption = document.createElement("option");
+		  allOption.value = "";
+		  allOption.text = "All";
+		  backgroundDropdown.add(allOption);
+
+		  // Get all unique backgrounds from originalNfts and count the number of NFTs with each background
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueBackgrounds.indexOf(nft.Background) === -1) {
+			  uniqueBackgrounds.push(nft.Background);
+			  backgroundCounts[nft.Background] = 1;
+			} else {
+			  backgroundCounts[nft.Background]++;
+			}
+		  }
+
+		  uniqueBackgrounds.sort();
+
+		  // Create and append an option for each unique background, with the count in the label text
+		  for (var j = 0; j < uniqueBackgrounds.length; j++) {
+			var option = document.createElement("option");
+			option.value = uniqueBackgrounds[j];
+			option.text = uniqueBackgrounds[j] + " (" + backgroundCounts[uniqueBackgrounds[j]] + ")";
+			backgroundDropdown.add(option);
 		  }
 		}
-		
-		uniqueBackgrounds.sort();
-		
-		// Create and append an option for each unique background
-		for (var j = 0; j < uniqueBackgrounds.length; j++) {
-		  var option = document.createElement("option");
-		  option.value = uniqueBackgrounds[j];
-		  option.text = uniqueBackgrounds[j];
-		  backgroundDropdown.add(option);
-		}
-	  }
+
+	  
 	  
 	  // Populate the broom dropdown with unique broom options
 	  function populateBroomDropdown() {
 		var broomDropdown = document.getElementById("broom-dropdown");
 		var uniqueBrooms = [];
+		var broomCounts = {};
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    broomDropdown.add(allOption);
 		
-		// Get all unique brooms from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueBrooms.indexOf(nft.Broom) === -1) {
-			uniqueBrooms.push(nft.Broom);
+		  // Get all unique brooms from originalNfts and count the number of NFTs with each broom
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueBrooms.indexOf(nft.Broom) === -1) {
+			  uniqueBrooms.push(nft.Broom);
+			  broomCounts[nft.Broom] = 1;
+			} else {
+			  broomCounts[nft.Broom]++;
+			}
 		  }
-		}
 		
 		uniqueBrooms.sort();
 		
@@ -6099,7 +6113,7 @@
 		for (var j = 0; j < uniqueBrooms.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueBrooms[j];
-		  option.text = uniqueBrooms[j];
+		  option.text = uniqueBrooms[j] + " (" + broomCounts[uniqueBrooms[j]] + ")";
 		  broomDropdown.add(option);
 		}
 	  }
@@ -6108,19 +6122,23 @@
 	  function populateSkinDropdown() {
 		var skinDropdown = document.getElementById("skin-dropdown");
 		var uniqueSkins = [];
+		var skinCounts = {};
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    skinDropdown.add(allOption);
 		
-		// Get all unique skins from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueSkins.indexOf(nft.Skin) === -1) {
-			uniqueSkins.push(nft.Skin);
+		  // Get all unique skins from originalNfts and count the number of NFTs with each skin
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueSkins.indexOf(nft.Skin) === -1) {
+			  uniqueSkins.push(nft.Skin);
+			  skinCounts[nft.Skin] = 1;
+			} else {
+			  skinCounts[nft.Skin]++;
+			}
 		  }
-		}
 		
 		uniqueSkins.sort();
 		
@@ -6128,7 +6146,7 @@
 		for (var j = 0; j < uniqueSkins.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueSkins[j];
-		  option.text = uniqueSkins[j];
+		  option.text = uniqueSkins[j] + " (" + skinCounts[uniqueSkins[j]] + ")";
 		  skinDropdown.add(option);
 		}
 	  }
@@ -6137,19 +6155,23 @@
 	  function populateHandDropdown() {
 		var handDropdown = document.getElementById("hand-dropdown");
 		var uniqueHands = [];
+		var handCounts = {};
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    handDropdown.add(allOption);
 		
-		// Get all unique hands from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueHands.indexOf(nft.Hand) === -1) {
-			uniqueHands.push(nft.Hand);
+		  // Get all unique hands from originalNfts and count the number of NFTs with each hand
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueHands.indexOf(nft.Hand) === -1) {
+			  uniqueHands.push(nft.Hand);
+			  handCounts[nft.Hand] = 1;
+			} else {
+			  handCounts[nft.Skin]++;
+			}
 		  }
-		}
 		
 		uniqueHands.sort();
 		
@@ -6157,7 +6179,7 @@
 		for (var j = 0; j < uniqueHands.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueHands[j];
-		  option.text = uniqueHands[j];
+		  option.text = uniqueHands[j] + " (" + handCounts[uniqueHands[j]] + ")";
 		  handDropdown.add(option);
 		}
 	  }
@@ -6166,19 +6188,23 @@
 	  function populateMouthDropdown() {
 		var mouthDropdown = document.getElementById("mouth-dropdown");
 		var uniqueMouths = [];
+		var mouthCounts = [];
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    mouthDropdown.add(allOption);
 		
-		// Get all unique mouths from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueMouths.indexOf(nft.Mouth) === -1) {
-			uniqueMouths.push(nft.Mouth);
+		  // Get all unique mouths from originalNfts and count the number of NFTs with each mouth
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueMouths.indexOf(nft.Mouth) === -1) {
+			  uniqueMouths.push(nft.Mouth);
+			  mouthCounts[nft.Mouth] = 1;
+			} else {
+			  mouthCounts[nft.Mouth]++;
+			}
 		  }
-		}
 		
 		uniqueMouths.sort();
 		
@@ -6186,7 +6212,7 @@
 		for (var j = 0; j < uniqueMouths.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueMouths[j];
-		  option.text = uniqueMouths[j];
+		  option.text = uniqueMouths[j] + " (" + mouthCounts[uniqueMouths[j]] + ")";
 		  mouthDropdown.add(option);
 		}
 	  }
@@ -6195,19 +6221,23 @@
 	  function populateHeadDropdown() {
 		var headDropdown = document.getElementById("head-dropdown");
 		var uniqueHeads = [];
+		var headCounts = [];
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    headDropdown.add(allOption);
 		
-		// Get all unique heads from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueHeads.indexOf(nft.Head) === -1) {
-			uniqueHeads.push(nft.Head);
+		  // Get all unique heads from originalNfts and count the number of NFTs with each head
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueHeads.indexOf(nft.Head) === -1) {
+			  uniqueHeads.push(nft.Head);
+			  headCounts[nft.Head] = 1;
+			} else {
+			  headCounts[nft.Head]++;
+			}
 		  }
-		}
 		
 		uniqueHeads.sort();
 		
@@ -6215,7 +6245,7 @@
 		for (var j = 0; j < uniqueHeads.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueHeads[j];
-		  option.text = uniqueHeads[j];
+		  option.text = uniqueHeads[j] + " (" + headCounts[uniqueHeads[j]] + ")";
 		  headDropdown.add(option);
 		}
 	  }
@@ -6224,19 +6254,23 @@
 	  function populateHandDropdown() {
 		var handDropdown = document.getElementById("hand-dropdown");
 		var uniqueHands = [];
+		var handCounts = [];
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    handDropdown.add(allOption);
 		
-		// Get all unique hands from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueHands.indexOf(nft.Hand) === -1) {
-			uniqueHands.push(nft.Hand);
+		  // Get all unique hands from originalNfts and count the number of NFTs with each hand
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueHands.indexOf(nft.Hand) === -1) {
+			  uniqueHands.push(nft.Hand);
+			  handCounts[nft.Hand] = 1;
+			} else {
+			  handCounts[nft.Hand]++;
+			}
 		  }
-		}
 		
 		uniqueHands.sort();
 		
@@ -6244,7 +6278,7 @@
 		for (var j = 0; j < uniqueHands.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueHands[j];
-		  option.text = uniqueHands[j];
+		  option.text = uniqueHands[j] + " (" + handCounts[uniqueHands[j]] + ")";
 		  handDropdown.add(option);
 		}
 	  }
@@ -6253,19 +6287,23 @@
 	  function populateEyesDropdown() {
 		var eyesDropdown = document.getElementById("eyes-dropdown");
 		var uniqueEyes = [];
+		var eyesCounts = [];
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    eyesDropdown.add(allOption);
 		
-		// Get all unique eyess from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueEyes.indexOf(nft.Eyes) === -1) {
-			uniqueEyes.push(nft.Eyes);
+		  // Get all unique eyes from originalNfts and count the number of NFTs with each eyes
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueEyes.indexOf(nft.Eyes) === -1) {
+			  uniqueEyes.push(nft.Eyes);
+			  eyesCounts[nft.Eyes] = 1;
+			} else {
+			  eyesCounts[nft.Eyes]++;
+			}
 		  }
-		}
 		
 		uniqueEyes.sort();
 		
@@ -6273,7 +6311,7 @@
 		for (var j = 0; j < uniqueEyes.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueEyes[j];
-		  option.text = uniqueEyes[j];
+		  option.text = uniqueEyes[j] + " (" + eyesCounts[uniqueEyes[j]] + ")";
 		  eyesDropdown.add(option);
 		}
 	  }
@@ -6282,19 +6320,23 @@
 	  function populateNeckholeDropdown() {
 		var neckholeDropdown = document.getElementById("neckhole-dropdown");
 		var uniqueNeckholes = [];
+		var neckholeCounts = [];
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    neckholeDropdown.add(allOption);
 		
-		// Get all unique neckholes from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueNeckholes.indexOf(nft.Neckhole) === -1) {
-			uniqueNeckholes.push(nft.Neckhole);
+		  // Get all unique neckholes from originalNfts and count the number of NFTs with each neckhole
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueNeckholes.indexOf(nft.Neckhole) === -1) {
+			  uniqueNeckholes.push(nft.Neckhole);
+			  neckholeCounts[nft.Neckhole] = 1;
+			} else {
+			  neckholeCounts[nft.Neckhole]++;
+			}
 		  }
-		}
 		
 		uniqueNeckholes.sort();
 		
@@ -6302,7 +6344,7 @@
 		for (var j = 0; j < uniqueNeckholes.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueNeckholes[j];
-		  option.text = uniqueNeckholes[j];
+		  option.text = uniqueNeckholes[j] + " (" + neckholeCounts[uniqueNeckholes[j]] + ")";
 		  neckholeDropdown.add(option);
 		}
 	  }
@@ -6311,19 +6353,23 @@
 	  function populateClothingDropdown() {
 		var clothingDropdown = document.getElementById("clothing-dropdown");
 		var uniqueClothings = [];
+		var clothingCounts = [];
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    clothingDropdown.add(allOption);
 		
-		// Get all unique clothings from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueClothings.indexOf(nft.Clothing) === -1) {
-			uniqueClothings.push(nft.Clothing);
+		  // Get all unique clothings from originalNfts and count the number of NFTs with each clothing
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueClothings.indexOf(nft.Clothing) === -1) {
+			  uniqueClothings.push(nft.Clothing);
+			  clothingCounts[nft.Clothing] = 1;
+			} else {
+			  clothingCounts[nft.Clothing]++;
+			}
 		  }
-		}
 		
 		uniqueClothings.sort();
 		
@@ -6331,7 +6377,7 @@
 		for (var j = 0; j < uniqueClothings.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueClothings[j];
-		  option.text = uniqueClothings[j];
+		  option.text = uniqueClothings[j] + " (" + clothingCounts[uniqueClothings[j]] + ")";
 		  clothingDropdown.add(option);
 		}
 	  }
@@ -6340,19 +6386,23 @@
 	  function populateHelmetDropdown() {
 		var helmetDropdown = document.getElementById("helmet-dropdown");
 		var uniqueHelmets = [];
+		var helmetCounts = [];
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    helmetDropdown.add(allOption);
 		
-		// Get all unique helmets from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueHelmets.indexOf(nft.Helmet) === -1) {
-			uniqueHelmets.push(nft.Helmet);
+		  // Get all unique helmets from originalNfts and count the number of NFTs with each helmet
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueHelmets.indexOf(nft.Helmet) === -1) {
+			  uniqueHelmets.push(nft.Helmet);
+			  helmetCounts[nft.Helmet] = 1;
+			} else {
+			  helmetCounts[nft.Helmet]++;
+			}
 		  }
-		}
 		
 		uniqueHelmets.sort();
 		
@@ -6360,7 +6410,7 @@
 		for (var j = 0; j < uniqueHelmets.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueHelmets[j];
-		  option.text = uniqueHelmets[j];
+		  option.text = uniqueHelmets[j] + " (" + helmetCounts[uniqueHelmets[j]] + ")";
 		  helmetDropdown.add(option);
 		}
 	  }
@@ -6369,19 +6419,23 @@
 	  function populateExtraDropdown() {
 		var extraDropdown = document.getElementById("extra-dropdown");
 		var uniqueExtras = [];
+		var extraCounts = [];
 		
 	    var allOption = document.createElement("option");
 	    allOption.value = "";
 	    allOption.text = "All";
 	    extraDropdown.add(allOption);
 		
-		// Get all unique extras from originalNfts
-		for (var i = 0; i < originalNFTs.length; i++) {
-		  var nft = originalNFTs[i];
-		  if (uniqueExtras.indexOf(nft.Extra) === -1) {
-			uniqueExtras.push(nft.Extra);
+		  // Get all unique extras from originalNfts and count the number of NFTs with each extra
+		  for (var i = 0; i < originalNFTs.length; i++) {
+			var nft = originalNFTs[i];
+			if (uniqueExtras.indexOf(nft.Extra) === -1) {
+			  uniqueExtras.push(nft.Extra);
+			  extraCounts[nft.Extra] = 1;
+			} else {
+			  extraCounts[nft.Extra]++;
+			}
 		  }
-		}
 		
 		uniqueExtras.sort();
 		
@@ -6389,7 +6443,7 @@
 		for (var j = 0; j < uniqueExtras.length; j++) {
 		  var option = document.createElement("option");
 		  option.value = uniqueExtras[j];
-		  option.text = uniqueExtras[j];
+		  option.text = uniqueExtras[j] + " (" + extraCounts[uniqueExtras[j]] + ")";
 		  extraDropdown.add(option);
 		}
 	  }
