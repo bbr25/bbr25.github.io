@@ -3,6 +3,7 @@
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://degens.degensfactory.xyz/_next/static/media/logo_broom.981b15b9.svg">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       window.scrollTo(0, 0);
@@ -107,6 +108,21 @@
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: white;
 		}
+		
+        #wallet-search {
+            height: 30px;
+			width: 600px;
+            font-size: 20px;
+			box-shadow: 1px 1px 5px #555 inset;
+            padding: 5px;
+			font-weight: bold;
+			text-align: center;
+			margin-bottom: 10px;
+			color: #e873ff !important;
+			background-image: linear-gradient(#e873ff, #53fffc);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: white;
+		}
 
 		
 		#sort-dropdown {
@@ -142,21 +158,18 @@
 		}
 		
 		.attribute-dropdown {
-			font-size: 14px;
-			height: 30px;
-			width: 100%;
-			margin-bottom: 1em;
-			box-shadow: 1px 1px 5px #555 inset;
-			color: #e873ff !important;
-			background: black;
-			background-image: linear-gradient(#e873ff, #53fffc);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
+		  font-size: 14px;
+		  height: 30px;
+		  width: 100%;
+		  margin-bottom: 1em;
+		  box-shadow: 1px 1px 5px #555 inset;
+		  color: #e873ff;
+		  background: black;
+		  background-image: linear-gradient(#e873ff, #53fffc);
+		  -webkit-background-clip: text;
+		  -webkit-text-fill-color: transparent;
 		}
-		
-		.count {
-		  color: blue;
-		}
+
 		
 		label {
 		  flex: 1;
@@ -317,6 +330,9 @@
 <body>
 		<h1><img src="https://degens.degensfactory.xyz/_next/static/media/logo.f69ca142.svg" alt="Logo">Rarity</h1>
 		<center>
+		 <input type="text" id="wallet-search" placeholder="Address">
+		 <button id="submit-btn" class="clear-button">Submit</button>
+		 <br>
 		<div class="search-container">
 		 <input type="text" id="search-input" placeholder="Search ID">
 		<select id="sort-dropdown">
@@ -6001,6 +6017,9 @@
 
 
 	function displayNFTs() {
+	  if (!nfts) {
+		nfts = originalNFTs;
+	  }
 	  var startIndex = displayedNFTs;
 	  var endIndex = Math.min(displayedNFTs + nftsPerPage, nfts.length);
 
@@ -6448,6 +6467,104 @@
 		}
 	  }
 
+	const submitButton = document.getElementById("submit-btn");
+	const searchWallet = document.getElementById("wallet-search");
+
+	submitButton.addEventListener("click", function (event) {
+	  const url = "https://degen.bbr25.co.uk/proxy.php?url=https://api-mainnet.magiceden.dev/v2/wallets/" + encodeURIComponent(searchWallet.value) + "/tokens?offset=0&limit=500&listStatus=both";
+	  $.ajax({
+		type: "GET",
+		url: url,
+		success: function(response) {
+		  const stringResponse = JSON.stringify(response); // Convert the JSON response to a string
+		  const parsedResponse = JSON.parse(stringResponse); // Parse the string back to JSON
+		  const degens = parsedResponse.filter(entry => entry.name.includes("Degen #")).map(entry => entry.name.match(/Degen #(\d+)/)[1]); // Filter the entries that contain "Degen #" and extract the number from the name
+
+		  nfts = originalNFTs.slice(); // Restore the original NFT list
+		  sortNFTs();
+		  displayedNFTs = 0; // Reset the displayed NFTs counter
+		  nftContainer.innerHTML = ""; // Clear the existing NFT container
+
+		  degens.forEach(degen => {
+			displayMatchingNFTs(degens);
+		  });
+		},
+		error: function() {
+		  alert("Something went wrong");
+		}
+	  });
+	});
+
+
+function displayMatchingNFTs(degens) {
+  const matchingNFTs = [];
+  degens.forEach(degen => {
+    nfts.forEach(nft => {
+      const degenNum = nft.number.split("#")[1];
+      if (degenNum === degen) {
+        matchingNFTs.push(nft.number);
+      }
+    });
+  });
+  const uniqueMatchingNFTs = [...new Set(matchingNFTs)]; // Remove duplicates
+  displayNFTsInArray(uniqueMatchingNFTs); // Display the matching NFTs sorted by rarity
+}
+
+function displayNFTsInArray(nftArray) {
+  nfts = originalNFTs.slice(); // Restore the original NFT list before filtering
+  nfts = nfts.filter(nft => nftArray.includes(nft.number));
+  sortNFTs();
+  displayNFTsFromArray(nfts);
+}
+
+function displayNFTsFromArray(nftArray) {
+  var startIndex = displayedNFTs;
+  var endIndex = Math.min(displayedNFTs + nftsPerPage, nftArray.length);
+
+  for (var i = startIndex; i < endIndex; i++) {
+    var nft = nftArray[i];
+
+    var nftCard = document.createElement("div");
+    nftCard.classList.add("nft-card");
+
+    var nftImage = document.createElement("img");
+    nftImage.classList.add("nft-image");
+    nftImage.src = nft.image;
+
+    var nftNumber = document.createElement("div");
+    nftNumber.classList.add("nft-number");
+    nftNumber.textContent = nft.number;
+
+    var nftDegens = document.createElement("div");
+    nftDegens.classList.add("nft-degens");
+    nftDegens.textContent = "DegenRank: " + nft.degens;
+
+    var nftHowRare = document.createElement("div");
+    nftHowRare.classList.add("nft-howrare");
+    nftHowRare.textContent = "Howrare: " + nft.howrare;
+
+    var nftMoonRank = document.createElement("div");
+    nftMoonRank.classList.add("nft-moonrank");
+    nftMoonRank.textContent = "Moonrank: " + nft.moonrank;
+
+    nftCard.appendChild(nftImage);
+    nftCard.appendChild(nftNumber);
+    nftCard.appendChild(nftDegens);
+    nftCard.appendChild(nftHowRare);
+    nftCard.appendChild(nftMoonRank);
+    nftContainer.appendChild(nftCard);
+
+    // Attach click event listener to open the modal
+    nftCard.addEventListener("click", function(nft) {
+      return function() {
+        openModal(nft);
+      };
+    }(nft));
+  }
+  displayedNFTs += nftsPerPage;
+}
+
+
 	function searchNFTs() {
 		var searchInput = document.getElementById("search-input").value.trim().toLowerCase();
 		nfts = originalNFTs.slice(); // Restore the original NFT list before filtering
@@ -6792,18 +6909,21 @@
 	
 	const clearButton = document.getElementById("clear-btn");
 	const searchInput = document.getElementById("search-input");
+	const walletInput = document.getElementById("wallet-search");
 	clearButton.addEventListener("click", () => {
 	  const attributeDropdowns = document.getElementsByClassName("attribute-dropdown");
 	  for (let i = 0; i < attributeDropdowns.length; i++) {
 		attributeDropdowns[i].selectedIndex = 0;
 	  }
 	searchInput.value = "";
+	walletInput.value = "";
 	nfts = originalNFTs.slice(); // Restore the original NFT list
 	sortNFTs();
 	displayedNFTs = 0; // Reset the displayed NFTs counter
 	nftContainer.innerHTML = ""; // Clear the existing NFT container
 	displayNFTs(); // Display the original NFTs sorted by rarity
 	});
+	
 
     </script>
 </body>
