@@ -6471,30 +6471,51 @@
 	const submitButton = document.getElementById("submit-btn");
 	const searchWallet = document.getElementById("wallet-search");
 
-	submitButton.addEventListener("click", function (event) {
-	  const url = "https://degen.bbr25.co.uk/proxy.php?url=https://api-mainnet.magiceden.dev/v2/wallets/" + encodeURIComponent(searchWallet.value) + "/tokens?offset=0&limit=500&listStatus=both";
-	  $.ajax({
-		type: "GET",
-		url: url,
-		success: function(response) {
-		  const stringResponse = JSON.stringify(response); // Convert the JSON response to a string
-		  const parsedResponse = JSON.parse(stringResponse); // Parse the string back to JSON
-		  const degens = parsedResponse.filter(entry => entry.name.includes("Degen #")).map(entry => entry.name.match(/Degen #(\d+)/)[1]); // Filter the entries that contain "Degen #" and extract the number from the name
+submitButton.addEventListener("click", function (event) {
+  const baseUrl = "https://degen.bbr25.co.uk/proxy.php?url=https://api-mainnet.magiceden.dev/v2/wallets/" + encodeURIComponent(searchWallet.value) + "/tokens?";
+  const urls = [
+    baseUrl + "offset=0&limit=100&listStatus=both",
+    baseUrl + "offset=100&limit=100&listStatus=both",
+    baseUrl + "offset=200&limit=100&listStatus=both",
+	baseUrl + "offset=300&limit=100&listStatus=both",
+	baseUrl + "offset=400&limit=100&listStatus=both",
+	baseUrl + "offset=500&limit=100&listStatus=both",
+  ];
 
-		  nfts = originalNFTs.slice(); // Restore the original NFT list
-		  sortNFTs();
-		  displayedNFTs = 0; // Reset the displayed NFTs counter
-		  nftContainer.innerHTML = ""; // Clear the existing NFT container
+  const requests = urls.map(url =>
+    $.ajax({
+      type: "GET",
+      url,
+      success: response => response.entries,
+      error: (jqXHR, textStatus, errorThrown) => {
+        console.error(`Request failed: ${url}`);
+        console.error(`Error thrown: ${errorThrown}`);
+      }
+    })
+  );
 
-		  degens.forEach(degen => {
-			displayMatchingNFTs(degens);
-		  });
-		},
-		error: function() {
-		  alert("Something went wrong");
-		}
-	  });
-	});
+  $.when(...requests).done(function (...responses) {
+    const allEntries = responses.flatMap(response => response[0]);
+    console.log(allEntries);
+    const degens = allEntries.filter(entry => entry.name.includes("Degen #")).map(entry => entry.name.match(/Degen #(\d+)/)[1]);
+
+    nfts = originalNFTs.slice();
+    sortNFTs();
+    displayedNFTs = 0;
+    nftContainer.innerHTML = "";
+
+    if (Array.isArray(degens)) {
+      degens.forEach(degen => {
+        displayMatchingNFTs(degens);
+      });
+    } else {
+      console.error("degens is not an array", degens);
+    }
+  }).fail(function () {
+    alert("Something went wrong");
+  });
+});
+
 
 
 function displayMatchingNFTs(degens) {
@@ -6902,9 +6923,11 @@ function displayNFTsFromArray(nftArray) {
 	window.addEventListener("load", function() {
 	  // Get the search input element
 	  var searchInput = document.getElementById("search-input");
+	  var walletInput = document.getElementById("wallet-search");
 
 	  // Clear the search input value
 	  searchInput.value = "";
+	  walletInput.value = "";
 	});
 	
 	
