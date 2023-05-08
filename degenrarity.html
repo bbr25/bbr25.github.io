@@ -6911,6 +6911,7 @@ function displayNFTsFromArray(nftArray) {
 	const clearButton = document.getElementById("clear-btn");
 	const searchInput = document.getElementById("search-input");
 	const walletInput = document.getElementById("wallet-search");
+	const sortDropdown = document.getElementById("sort-dropdown");
 	clearButton.addEventListener("click", () => {
 	  const attributeDropdowns = document.getElementsByClassName("attribute-dropdown");
 	  for (let i = 0; i < attributeDropdowns.length; i++) {
@@ -6918,6 +6919,7 @@ function displayNFTsFromArray(nftArray) {
 	  }
 	searchInput.value = "";
 	walletInput.value = "";
+	sortDropdown.selectedIndex = 0;
 	nfts = originalNFTs.slice(); // Restore the original NFT list
 	sortNFTs();
 	displayedNFTs = 0; // Reset the displayed NFTs counter
