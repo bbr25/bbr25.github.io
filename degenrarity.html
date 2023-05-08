@@ -6496,7 +6496,6 @@ submitButton.addEventListener("click", function (event) {
 
   $.when(...requests).done(function (...responses) {
     const allEntries = responses.flatMap(response => response[0]);
-    console.log(allEntries);
     const degens = allEntries.filter(entry => entry.name.includes("Degen #")).map(entry => entry.name.match(/Degen #(\d+)/)[1]);
 
     nfts = originalNFTs.slice();
