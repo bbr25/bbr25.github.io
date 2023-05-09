@@ -47,6 +47,8 @@
 			background-image: linear-gradient(#e873ff, #53fffc);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
+		    box-shadow: 0 0 0 1.5px #53fffc, 0 0 0 3px #e873ff;
+		    border-radius: 5px;
         }
         
         .nft-image {
@@ -213,6 +215,8 @@
 			transform: translate(-50%, -50%);
 			overflow: auto;
 			background-color: rgba(0, 0, 0, 0.5);
+			box-shadow: 0 0 0 2px #53fffc, 0 0 0 4px #e873ff;
+			border-radius: 5px;
 		  }
 		  
 		.modal-content {
@@ -227,6 +231,7 @@
 		  flex-direction: row;
 		  align-items: center;
 		  font-size: 20px;
+
 		}
 
 		
@@ -298,8 +303,8 @@
 		  color: white;
 		  float: right;
 		  position: absolute;
-		  top: 10px;
-		  right: 10px;
+		  top: 0px;
+		  right: 8px;
 		  font-size: 50px;
 		  font-weight: bold;
 		  cursor: pointer;
@@ -311,6 +316,15 @@
 			text-decoration: none;
 			cursor: pointer;
 		  }
+		  
+		.border-gradient {
+		  border: 10px solid;
+		  border-image-slice: 1;
+		  border-width: 5px;
+		}
+		.border-gradient-purple {
+		  border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+		}
 		  
 		@media only screen and (max-device-width: 767px) {
 		  #nft-container {
