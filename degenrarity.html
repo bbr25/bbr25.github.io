@@ -5483,6 +5483,16 @@ submitButton.addEventListener("click", function (event) {
 	baseUrl + "offset=300&limit=100&listStatus=both",
 	baseUrl + "offset=400&limit=100&listStatus=both",
 	baseUrl + "offset=500&limit=100&listStatus=both",
+	baseUrl + "offset=600&limit=100&listStatus=both",
+	baseUrl + "offset=700&limit=100&listStatus=both",
+	baseUrl + "offset=800&limit=100&listStatus=both",
+	baseUrl + "offset=900&limit=100&listStatus=both",
+	baseUrl + "offset=1000&limit=100&listStatus=both",
+	baseUrl + "offset=1100&limit=100&listStatus=both",
+	baseUrl + "offset=1200&limit=100&listStatus=both",
+	baseUrl + "offset=1300&limit=100&listStatus=both",
+	baseUrl + "offset=1400&limit=100&listStatus=both",
+	baseUrl + "offset=1500&limit=100&listStatus=both",
   ];
 
   const requests = urls.map(url =>
@@ -5814,15 +5824,15 @@ function displayNFTsFromArray(nftArray) {
 
 	// Add class based on the "degenrank" value to apply different color
 	function getDegenRankClass(degenRankValue) {
-	if (degenRankValue >= 0 && degenRankValue <= 55) {
+	if (degenRankValue >= 0 && degenRankValue <= 45) {
 	  return "rank-mythic";
-	} else if (degenRankValue > 55 && degenRankValue <= 278) {
+	} else if (degenRankValue > 45 && degenRankValue <= 227) {
 	  return "rank-legendary";
-	} else if (degenRankValue > 278 && degenRankValue <= 833) {
+	} else if (degenRankValue > 227 && degenRankValue <= 681) {
 	  return "rank-epic";
-	} else if (degenRankValue > 833 && degenRankValue <= 1944) {
+	} else if (degenRankValue > 681 && degenRankValue <= 1590) {
 	  return "rank-rare";
-	} else if (degenRankValue > 1944 && degenRankValue <= 3333) {
+	} else if (degenRankValue > 1590 && degenRankValue <= 2726) {
 	  return "rank-uncommon";
 	} else {
 	  return "rank-common";
@@ -5832,15 +5842,15 @@ function displayNFTsFromArray(nftArray) {
 	
 	// Add class based on the "howrare" value to apply different color
 	function gethowRareClass(howRareValue) {
-	if (howRareValue >= 0 && howRareValue <= 55) {
+	if (howRareValue >= 0 && howRareValue <= 45) {
 	  return "rank-mythic";
-	} else if (howRareValue > 55 && howRareValue <= 278) {
+	} else if (howRareValue > 45 && howRareValue <= 227) {
 	  return "rank-legendary";
-	} else if (howRareValue > 278 && howRareValue <= 833) {
+	} else if (howRareValue > 227 && howRareValue <= 681) {
 	  return "rank-epic";
-	} else if (howRareValue > 833 && howRareValue <= 1944) {
+	} else if (howRareValue > 681 && howRareValue <= 1590) {
 	  return "rank-rare";
-	} else if (howRareValue > 1944 && howRareValue <= 3333) {
+	} else if (howRareValue > 1590 && howRareValue <= 2726) {
 	  return "rank-uncommon";
 	} else {
 	  return "rank-common";
@@ -5850,15 +5860,15 @@ function displayNFTsFromArray(nftArray) {
 	
 	// Add class based on the "moonrank" value to apply different color
 	function getmoonRankClass(moonRankValue) {
-	if (moonRankValue >= 0 && moonRankValue <= 55) {
+	if (moonRankValue >= 0 && moonRankValue <= 45) {
 	  return "rank-mythic";
-	} else if (moonRankValue > 55 && moonRankValue <= 278) {
+	} else if (moonRankValue > 45 && moonRankValue <= 227) {
 	  return "rank-legendary";
-	} else if (moonRankValue > 278 && moonRankValue <= 833) {
+	} else if (moonRankValue > 227 && moonRankValue <= 681) {
 	  return "rank-epic";
-	} else if (moonRankValue > 833 && moonRankValue <= 1944) {
+	} else if (moonRankValue > 681 && moonRankValue <= 1590) {
 	  return "rank-rare";
-	} else if (moonRankValue > 1944 && moonRankValue <= 3333) {
+	} else if (moonRankValue > 1590 && moonRankValue <= 2726) {
 	  return "rank-uncommon";
 	} else {
 	  return "rank-common";
