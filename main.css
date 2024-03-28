@@ -1,11 +1,52 @@
 body {
   margin: 0;
-  background-image: url(Logo4-nobg-1.webp);
+  background-image: url(Logo4-nobg.png);
   height: 100vh;
   background-size: auto 70%;
   background-position: center center;
   background-repeat: no-repeat;
   background-color: black;
+}
+
+.boujee-text {
+  --bg-size: 400%;
+  --color-one: hsl(281, 86%, 47%);
+  --color-two: hsl(184, 86%, 61%);
+  --color-three: hsl(304, 100%, 70%);
+  font-size: clamp(2rem, 8vmin, 7rem);
+  background: linear-gradient(
+                90deg,
+                var(--color-one),
+                var(--color-two),
+                var(--color-three),
+				var(--color-one)
+              ) 0 0 / var(--bg-size) 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@keyframes move-bg {
+  to {
+    background-position: var(--bg-size) 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .boujee-text {
+    animation: move-bg 30s linear infinite;
+  }
+  @keyframes move-bg {
+    to {
+      background-position: var(--bg-size) 0;
+    }
+  }
+}
+
+h1 {
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  opacity: 0.5;
+  text-align: center;
 }
 
 
@@ -23,4 +64,3 @@ body {
   font-family: 'Roboto', sans-serif;
   padding: 1vh;
 }
-
