@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  background-image: url(Logo4-nobg.png);
+  height: 100vh;
+  background-size: auto 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: black;
+}
+
+
+.viewport {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 6vh;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  padding: 1vh;
+}
+
