@@ -3,7 +3,9 @@ const holes = [...document.querySelectorAll('.hole')]
 const scoreEl = document.querySelector('.score span')
 let score = 0
 
+// Preload the audio file
 const sound = new Audio("assets/smash.mp3")
+sound.preload = "auto";
 
 let speedupFactor = 0.2; // Initial speedup factor
 let lastScore = 0; // Keep track of the last score to determine when to increase speedupFactor
@@ -25,6 +27,7 @@ function run() {
             lastScore = score;
             consecutiveMisses = 0; // Reset consecutive misses count
         }
+        sound.currentTime = 0; // Rewind the audio to the beginning to ensure it plays immediately
         sound.play()
         scoreEl.textContent = score
         img.src = 'assets/urk-whacked.png'
