@@ -23,7 +23,7 @@ function run() {
     img.addEventListener('click', () => {
         score += 10
         if (score - lastScore >= 10) {
-            speedupFactor += 0.05; // Increase speedupFactor by 0.05 every time score increases by 10
+            speedupFactor += 0.025; // Increase speedupFactor by 0.05 every time score increases by 10
             lastScore = score;
             consecutiveMisses = 0; // Reset consecutive misses count
         }
