@@ -7,7 +7,7 @@ let score = 0
 const sound = new Audio("assets/smash.mp3")
 sound.preload = "auto";
 
-let speedupFactor = 0.2; // Initial speedup factor
+let speedupFactor = 0.1; // Initial speedup factor
 let lastScore = 0; // Keep track of the last score to determine when to increase speedupFactor
 let consecutiveMisses = 0; // Count consecutive times score hasn't increased
 
@@ -23,7 +23,7 @@ function run() {
     img.addEventListener('click', () => {
         score += 10
         if (score - lastScore >= 10) {
-            speedupFactor += 0.025; // Increase speedupFactor by 0.05 every time score increases by 10
+            speedupFactor += 0.02; // Increase speedupFactor by 0.05 every time score increases by 10
             lastScore = score;
             consecutiveMisses = 0; // Reset consecutive misses count
         }
