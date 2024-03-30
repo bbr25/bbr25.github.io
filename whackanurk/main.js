@@ -9,6 +9,15 @@ let speedupFactor = 0.2; // Initial speedup factor
 let lastScore = 0; // Keep track of the last score to determine when to increase speedupFactor
 let consecutiveMisses = 0; // Count consecutive times score hasn't increased
 
+function restartGame() {
+    score = 0;
+    speedupFactor = 0.2;
+    lastScore = 0;
+    consecutiveMisses = 0;
+    scoreEl.textContent = score;
+    run();
+}
+
 function run() {
     const i = Math.floor(Math.random() * holes.length)
     const hole = holes[i]
@@ -45,13 +54,15 @@ function run() {
         if (consecutiveMisses >= 3) {
             // Display "Game Over" screen
             alert("Game Over! Your score: " + score);
-            // You can perform additional actions here, like resetting the game.
+            restartGame(); // Restart the game
         } else {
             run(); // Start a new cycle if not game over yet
         }
     }, newTimeoutDuration)
 }
 
+// Start the game initially
+restartGame();
 
 
 run()
