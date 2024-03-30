@@ -66,8 +66,8 @@ body {
 }
 
 .cursor {
-    height: 10vw; /* Use viewport width as a unit for cursor height */
-    width: 9vw; /* Use viewport width as a unit for cursor width */
+    height: 12vw; /* Use viewport width as a unit for cursor height */
+    width: 11vw; /* Use viewport width as a unit for cursor width */
     position: absolute;
     top: 50%;
     left: 50%;
