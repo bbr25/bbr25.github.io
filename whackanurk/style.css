@@ -21,8 +21,8 @@ body {
 }
 
 .score {
-    font-size: 4vw; /* Use viewport width as a unit for font size */
-    margin-bottom: 2vw; /* Use viewport width as a unit for margin */
+    font-size: 6vw; /* Use viewport width as a unit for font size */
+    margin-bottom: 3vw; /* Use viewport width as a unit for margin */
     text-align: center; /* Center-align the score */
 }
 
