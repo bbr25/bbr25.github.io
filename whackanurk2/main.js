@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Function to randomly show moles
         function showMoles() {
             const currentMoles = document.querySelectorAll('.mole').length;
-            const numMolesToShow = Math.min(Math.floor(Math.random() * 4) + 1, 4 - currentMoles); // Limit to 4 moles total
+            const numMolesToShow = Math.min(Math.floor(Math.random() * 5) + 1, 5 - currentMoles); // Limit to 5 moles total
             const holesArray = Array.from(holes);
             for (let i = 0; i < numMolesToShow; i++) {
                 const randomHole = holesArray[Math.floor(Math.random() * holesArray.length)];
