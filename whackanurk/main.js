@@ -40,7 +40,7 @@ function run() {
 
     // Calculate new timeout duration using a linear function
     const baseTimeout = 1500; // Base timeout duration
-    const minTimeout = 100; // Minimum timeout duration
+    const minTimeout = 150; // Minimum timeout duration
     const speedupFactor = 0.2 + (score / 1000); // Dynamically adjust speedupFactor based on score progression
     const newTimeoutDuration = Math.max(minTimeout, baseTimeout - (speedupFactor * score));
 
