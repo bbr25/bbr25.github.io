@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     img.classList.add('mole');
                     img.src = 'assets/urk.png';
                     randomHole.appendChild(img);
-                    const moleDuration = Math.random() * 2500 + 500; // Random time between 0.5 and 3 seconds
+                    const moleDuration = Math.random() * 1750 + 250; // Random time between 0.25 and 2 seconds
                     setTimeout(() => {
                         if (randomHole.contains(img)) {
                             randomHole.removeChild(img); // Remove mole if it's still there after its duration
