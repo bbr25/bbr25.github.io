@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Preload the audio file
     const sound = new Audio("assets/smash.mp3");
     sound.preload = "auto";
+	const gameOverSound = new Audio("assets/mfer.mp3");
+	gameOverSound.preload = "auto";
 
     // Function to display the countdown overlay and start the game after countdown
     function displayCountdownOverlay(count) {
@@ -82,6 +84,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (remainingTime <= 0) {
                     clearInterval(gameLoop); // Stop the game loop
                     clearInterval(timerInterval); // Stop the timer interval
+					gameOverSound.currentTime = 0; // Reset the sound to the beginning
+					gameOverSound.play(); // Play the game over sound
                     const replay = confirm("Game Over! Your score: " + score + ". Do you want to replay?");
                     if (replay) {
                         restartGame(); // Replay the game if user chooses to do so
