@@ -24,12 +24,20 @@ body {
     font-size: 3vw; /* Use viewport width as a unit for font size */
     margin-bottom: 2vw; /* Use viewport width as a unit for margin */
     text-align: center; /* Center-align the score */
+		  background-image: linear-gradient(#e873ff, #53fffc);
+		  -webkit-background-clip: text;
+		  		background-clip: text;
+		  -webkit-text-fill-color: transparent;
 }
 
 .timer {
     font-size: 2vw; /* Use viewport width as a unit for font size */
     margin-bottom: 1vw; /* Use viewport width as a unit for margin */
     text-align: center; /* Center-align the score */
+		  background-image: linear-gradient(#e873ff, #53fffc);
+		  -webkit-background-clip: text;
+		  		background-clip: text;
+		  -webkit-text-fill-color: transparent;
 }
 
 .board {
