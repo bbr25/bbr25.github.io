@@ -7,7 +7,6 @@ let score = 0
 const sound = new Audio("assets/smash.mp3")
 sound.preload = "auto";
 
-let speedupFactor = 0.2; // Initial speedup factor
 let lastScore = 0; // Keep track of the last score to determine when to increase speedupFactor
 let consecutiveMisses = 0; // Count consecutive times score hasn't increased
 
@@ -23,7 +22,6 @@ function run() {
     img.addEventListener('click', () => {
         score += 10
         if (score - lastScore >= 10) {
-            speedupFactor += 0.05; // Increase speedupFactor by 0.05 every time score increases by 10
             lastScore = score;
             consecutiveMisses = 0; // Reset consecutive misses count
         }
@@ -40,8 +38,12 @@ function run() {
 
     hole.appendChild(img)
 
-    // Decrease the timeout duration over time
-    const newTimeoutDuration = Math.max(100, 1500 * Math.pow(speedupFactor, -score / 100)); // Ensuring the minimum timeout is 100ms
+    // Calculate new timeout duration using a linear function
+    const baseTimeout = 1500; // Base timeout duration
+    const minTimeout = 150; // Minimum timeout duration
+    const speedupFactor = 0.2 + (score / 1000); // Dynamically adjust speedupFactor based on score progression
+    const newTimeoutDuration = Math.max(minTimeout, baseTimeout - (speedupFactor * score));
+
     timer = setTimeout(() => {
         hole.removeChild(img)
         consecutiveMisses++;
@@ -54,7 +56,6 @@ function run() {
         }
     }, newTimeoutDuration)
 }
-
 
 run()
 
