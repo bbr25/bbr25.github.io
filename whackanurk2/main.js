@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Function to randomly show moles
         function showMoles() {
             const currentMoles = document.querySelectorAll('.mole').length;
-            const numMolesToShow = Math.min(Math.floor(Math.random() * 5) + 1, 5 - currentMoles); // Limit to 5 moles total
+            const numMolesToShow = Math.min(Math.floor(Math.random() * 4) + 1, 4 - currentMoles); // Limit to 4 moles total
             const holesArray = Array.from(holes);
             for (let i = 0; i < numMolesToShow; i++) {
                 const randomHole = holesArray[Math.floor(Math.random() * holesArray.length)];
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     img.classList.add('mole');
                     img.src = 'assets/urk.png';
                     randomHole.appendChild(img);
-                    const moleDuration = Math.random() * 1300 + 200; // Random time between 0.2 and 1.5 seconds
+                    const moleDuration = Math.random() * 1800 + 200; // Random time between 0.2 and 2 seconds
                     setTimeout(() => {
                         if (randomHole.contains(img)) {
                             randomHole.removeChild(img); // Remove mole if it's still there after its duration
