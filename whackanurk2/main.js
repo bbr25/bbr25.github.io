@@ -100,12 +100,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }, Math.random() * 3000 + 1000); // Random interval between 1 and 4 seconds
     }
 
-    // Function to update the timer display
-    function updateTimer() {
-        const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000); // Calculate elapsed time in seconds
-        remainingTime = Math.max(60 - elapsedSeconds, 0); // Calculate remaining time
-        timerEl.textContent = `Time: ${remainingTime}s`; // Update the timer display
-    }
+	// Function to update the timer display
+	function updateTimer() {
+		const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000); // Calculate elapsed time in seconds
+		remainingTime = Math.max(60 - elapsedSeconds, 0); // Calculate remaining time
+		if (remainingTime === 0) {
+			timerEl.textContent = `Time: 0s`; // Update the timer display to show 0s when the game is over
+		} else {
+			timerEl.textContent = `Time: ${remainingTime}s`; // Update the timer display
+		}
+	}
 
     // Function to restart the game
     function restartGame() {
